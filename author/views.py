@@ -4,6 +4,12 @@ from author.models import Author
 from author.serializers import AuthorSerializers
 
 
+class AuthorCreateApiView(generics.CreateAPIView):
+    """Эндпоинт создания автора"""
+
+    serializer_class = AuthorSerializers
+
+
 class AuthorRetrieveApiView(generics.RetrieveAPIView):
     """Эндпоинт просмотра автора"""
 
