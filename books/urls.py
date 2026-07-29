@@ -2,8 +2,6 @@ from django.urls import path, include
 from books.views import BookViewSet, GenreViewSet, CategoryViewSet
 from rest_framework.routers import DefaultRouter
 
-from config.urls import urlpatterns
-
 router = DefaultRouter()
 router.register(r"", BookViewSet, basename="books")
 router.register(f"genres", GenreViewSet, basename="genres")
