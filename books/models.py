@@ -58,6 +58,7 @@ class Book(models.Model):
     quantity = models.PositiveSmallIntegerField(verbose_name="Количество книг")
     publication_date = models.DateField(verbose_name="Дата публикации", **NULLABLE)
     publisher = models.CharField(max_length=150, verbose_name="Издатель")
+    cover_image = models.ImageField(upload_to="books/cover_image", verbose_name="Обложка", **NULLABLE)
 
     def __str__(self):
         return f"{self.title} - {self.author}"

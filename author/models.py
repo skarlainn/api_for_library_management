@@ -2,8 +2,14 @@ from django.db import models
 
 
 class Author(models.Model):
-    first_name = models.CharField(max_length=150, verbose_name="Имя автора", help_text="Введите имя автора")
-    last_name = models.CharField(max_length=150, verbose_name="Фамилия автора", help_text="Введите фамилию автора")
+    first_name = models.CharField(
+        max_length=150, verbose_name="Имя автора", help_text="Введите имя автора"
+    )
+    last_name = models.CharField(
+        max_length=150,
+        verbose_name="Фамилия автора",
+        help_text="Введите фамилию автора",
+    )
     date_of_birth = models.DateField(
         verbose_name="Дата рождения автора",
         help_text="Укажите дату рождения в формате YYYY-MM-DD",
@@ -11,7 +17,10 @@ class Author(models.Model):
         null=True,
     )
     bio = models.TextField(
-        verbose_name="Биография автора", help_text="Напишите биографию автора", blank=True, null=True
+        verbose_name="Биография автора",
+        help_text="Напишите биографию автора",
+        blank=True,
+        null=True,
     )
     date_of_death = models.DateField(
         verbose_name="Дата смерти автора",
