@@ -37,6 +37,7 @@ class Book(models.Model):
         Genre,
         on_delete=models.SET_NULL,
         verbose_name="Жанр книги",
+        related_name="genres",
         help_text="Укажите жанр книги",
         **NULLABLE,
     )
