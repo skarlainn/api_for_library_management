@@ -29,6 +29,6 @@ class RentBooksAdmin(admin.ModelAdmin):
         "date_issue",
         "return_date",
         "is_returned",
-        "user",
+        "reader",
         "term",
     )

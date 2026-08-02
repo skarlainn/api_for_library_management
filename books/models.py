@@ -43,6 +43,7 @@ class Book(models.Model):
     )
     description = models.TextField(verbose_name="Описание книги", **NULLABLE)
     quantity = models.PositiveSmallIntegerField(verbose_name="Количество книг")
+    available_quantity = models.PositiveSmallIntegerField(verbose_name="Доступное количество книг")
     publication_date = models.DateField(verbose_name="Дата публикации", **NULLABLE)
     publisher = models.CharField(max_length=150, verbose_name="Издатель")
     cover_image = models.ImageField(upload_to="books/cover_image", verbose_name="Обложка", **NULLABLE)
@@ -66,15 +67,15 @@ class RentBooks(models.Model):
         help_text="Укажите книгу которую пользователь берет для чтения",
     )
     date_issue = models.DateField(auto_now_add=True, verbose_name="Дата выдачи книги")
-    return_date = models.DateField(verbose_name="Дата возврата книги")
+    return_date = models.DateField(verbose_name="Дата возврата книги", **NULLABLE)
     is_returned = models.BooleanField(default=False, verbose_name="Флаг возврата книги")
-    user = models.ForeignKey(
+    reader = models.ForeignKey(
         User, on_delete=models.DO_NOTHING, verbose_name="Читатель книги", help_text="Читатель книги"
     )
     term = models.PositiveSmallIntegerField(verbose_name="Срок аренды", help_text="Срок аренды в днях")
 
     def __str__(self):
-        return f"Книга: {self.book} у {self.user} на {self.term} дней"
+        return f"Книга: {self.book} у {self.reader} на {self.term} дней"
 
     class Meta:
         verbose_name = "Аренда книги"
