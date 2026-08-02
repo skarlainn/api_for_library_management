@@ -1,8 +1,8 @@
 from rest_framework import viewsets, generics
 from rest_framework.filters import SearchFilter
 
-from .models import Book, Genre, Category
-from .serializers import BookSerializer, GenreSerializer, CategorySerializer
+from .models import Book, Genre, RentBooks
+from .serializers import BookSerializer, GenreSerializer, RentBooksSerializer
 
 
 class BookViewSet(viewsets.ModelViewSet):
@@ -41,25 +41,25 @@ class GenreDestroyApiView(generics.DestroyAPIView):
 
 
 
-class CategoryListApiView(generics.ListAPIView):
-    queryset = Category.objects.all()
-    serializer_class = CategorySerializer
+class RentBooksListApiView(generics.ListAPIView):
+    queryset = RentBooks.objects.all()
+    serializer_class = RentBooksSerializer
 
 
-class CategoryCreateApiView(generics.CreateAPIView):
-    queryset = Category.objects.all()
-    serializer_class = CategorySerializer
+class RentBooksCreateApiView(generics.CreateAPIView):
+    queryset = RentBooks.objects.all()
+    serializer_class = RentBooksSerializer
 
 
-class CategoryRetrieveApiView(generics.RetrieveAPIView):
-    queryset = Category.objects.all()
-    serializer_class = CategorySerializer
+class RentBooksRetrieveApiView(generics.RetrieveAPIView):
+    queryset = RentBooks.objects.all()
+    serializer_class = RentBooksSerializer
 
 
-class CategoryUpdateApiView(generics.UpdateAPIView):
-    queryset = Category.objects.all()
-    serializer_class = CategorySerializer
+class RentBooksUpdateApiView(generics.UpdateAPIView):
+    queryset = RentBooks.objects.all()
+    serializer_class = RentBooksSerializer
 
 
-class CategoryDestroyApiView(generics.DestroyAPIView):
-    queryset = Category.objects.all()
+class RentBooksDestroyApiView(generics.DestroyAPIView):
+    queryset = RentBooks.objects.all()
