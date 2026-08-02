@@ -31,5 +31,5 @@ class RentBooksAdmin(admin.ModelAdmin):
         "return_date",
         "is_returned",
         "reader",
-        "term",
+        "deadline",
     )

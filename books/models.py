@@ -72,10 +72,12 @@ class RentBooks(models.Model):
     reader = models.ForeignKey(
         User, on_delete=models.DO_NOTHING, verbose_name="Читатель книги", help_text="Читатель книги"
     )
-    term = models.PositiveSmallIntegerField(verbose_name="Срок аренды", help_text="Срок аренды в днях")
+    deadline = models.DateField(
+        verbose_name="Крайний срок сдачи книги", help_text="Укажите крайний срок сдачи книги в формате YYYY-MM-DD"
+    )
 
     def __str__(self):
-        return f"Книга: {self.book} у {self.reader} на {self.term} дней"
+        return f"Книга: {self.book} у {self.reader} до {self.deadline}"
 
     class Meta:
         verbose_name = "Аренда книги"
