@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from books.models import Book, Genre, Category
+from books.models import Book, Genre, RentBooks
 
 
 @admin.register(Book)
@@ -17,11 +17,18 @@ class BookAdmin(admin.ModelAdmin):
     )
 
 
-@admin.register(Category)
-class CategoryAdmin(admin.ModelAdmin):
+@admin.register(Genre)
+class GenreAdmin(admin.ModelAdmin):
     list_display = ("name",)
 
 
-@admin.register(Genre)
-class GenreAdmin(admin.ModelAdmin):
-    list_display = ("name", "category",)
+@admin.register(RentBooks)
+class RentBooksAdmin(admin.ModelAdmin):
+    list_display = (
+        "book",
+        "date_issue",
+        "return_date",
+        "is_returned",
+        "user",
+        "term",
+    )
