@@ -1,4 +1,6 @@
-from django.urls import path, include
+from django.urls import path
+from rest_framework.routers import DefaultRouter
+
 from books.views import (
     BookViewSet,
     GenreListApiView,
@@ -6,13 +8,13 @@ from books.views import (
     GenreUpdateApiView,
     GenreRetrieveApiView,
     GenreDestroyApiView,
-    CategoryListApiView,
-    CategoryCreateApiView,
-    CategoryRetrieveApiView,
-    CategoryUpdateApiView,
-    CategoryDestroyApiView,
+    RentBooksListApiView,
+    RentBooksCreateApiView,
+    RentBooksRetrieveApiView,
+    RentBooksUpdateApiView,
+    RentBooksDestroyApiView,
 )
-from rest_framework.routers import DefaultRouter
+
 
 router = DefaultRouter()
 router.register(r"", BookViewSet, basename="books")
@@ -27,9 +29,9 @@ urlpatterns = [
     path("genres/<int:pk>/update/", GenreUpdateApiView.as_view(), name="genre-update"),
     path("genres/<int:pk>/", GenreRetrieveApiView.as_view(), name="genre-detail"),
     path("genres/<int:pk>/delete", GenreDestroyApiView.as_view(), name="genre-delete"),
-    path("categories/", CategoryListApiView.as_view(), name="categories-list"),
-    path("categories/create/", CategoryCreateApiView.as_view(), name="category-create"),
-    path("categories/<int:pk>/", CategoryRetrieveApiView.as_view(), name="category-detail"),
-    path("categories/<int:pk>/update/", CategoryUpdateApiView.as_view(), name="category-update"),
-    path("categories/<int:pk>/delete/", CategoryDestroyApiView.as_view(), name="category-delete"),
+    path("rent_books/", RentBooksListApiView.as_view(), name="rent-books-list"),
+    path("rent_books/create/", RentBooksCreateApiView.as_view(), name="rent-books-create"),
+    path("rent_books/<int:pk>/", RentBooksRetrieveApiView.as_view(), name="rent-books-detail"),
+    path("rent_books/<int:pk>/update/", RentBooksUpdateApiView.as_view(), name="rent-books-update"),
+    path("rent_books/<int:pk>/delete/", RentBooksDestroyApiView.as_view(), name="rent-books-delete"),
 ] + router.urls
