@@ -3,7 +3,7 @@ from datetime import date
 from django.core.mail import send_mail
 from rest_framework.exceptions import ValidationError
 
-from config.settings import EMAIL_HOST_USER
+#from config.settings import EMAIL_HOST_USER
 
 
 def return_book(rent_book, book):

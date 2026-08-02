@@ -69,7 +69,7 @@ class RentBooks(models.Model):
     date_issue = models.DateField(auto_now_add=True, verbose_name="Дата выдачи книги")
     return_date = models.DateField(verbose_name="Дата возврата книги", **NULLABLE)
     is_returned = models.BooleanField(default=False, verbose_name="Флаг возврата книги")
-    reader = models.ForeignKey(
+    user = models.ForeignKey(
         User, on_delete=models.DO_NOTHING, verbose_name="Читатель книги", help_text="Читатель книги"
     )
     deadline = models.DateField(
@@ -77,7 +77,7 @@ class RentBooks(models.Model):
     )
 
     def __str__(self):
-        return f"Книга: {self.book} у {self.reader} до {self.deadline}"
+        return f"Книга: {self.book} у {self.user} до {self.deadline}"
 
     class Meta:
         verbose_name = "Аренда книги"
