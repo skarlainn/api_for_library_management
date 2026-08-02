@@ -11,6 +11,7 @@ class BookAdmin(admin.ModelAdmin):
         "genre",
         "description",
         "quantity",
+        "available_quantity",
         "publication_date",
         "publisher",
         "cover_image",
