@@ -1,6 +1,7 @@
 from rest_framework import generics
 
 from author.models import Author
+from author.pagination import MyPagination
 from author.serializers import AuthorSerializers
 
 
@@ -22,6 +23,7 @@ class AuthorListApiView(generics.ListAPIView):
 
     queryset = Author.objects.all()
     serializer_class = AuthorSerializers
+    pagination_class = MyPagination
 
 
 class AuthorUpdateApiView(generics.UpdateAPIView):

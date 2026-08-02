@@ -2,12 +2,14 @@ from rest_framework import viewsets, generics
 from rest_framework.filters import SearchFilter
 
 from .models import Book, Genre, RentBooks
+from .pagination import MyPagination
 from .serializers import BookSerializer, GenreSerializer, RentBooksSerializer
 from .services import take_book, return_book
 
 
 class BookViewSet(viewsets.ModelViewSet):
     queryset = Book.objects.all()
+    pagination_class = MyPagination
     serializer_class = BookSerializer
     filter_backends = [SearchFilter]
     filterset_fields = (
@@ -30,6 +32,7 @@ class GenreRetrieveApiView(generics.RetrieveAPIView):
 class GenreListApiView(generics.ListAPIView):
     queryset = Genre.objects.all()
     serializer_class = GenreSerializer
+    pagination_class = MyPagination
 
 
 class GenreUpdateApiView(generics.UpdateAPIView):
@@ -45,6 +48,7 @@ class GenreDestroyApiView(generics.DestroyAPIView):
 class RentBooksListApiView(generics.ListAPIView):
     queryset = RentBooks.objects.all()
     serializer_class = RentBooksSerializer
+    pagination_class = MyPagination
 
 
 class RentBooksCreateApiView(generics.CreateAPIView):
