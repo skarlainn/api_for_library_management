@@ -1,0 +1,138 @@
+[
+{
+    "model": "books.genre",
+    "pk": 1,
+    "fields": {
+        "name": "Фантастика",
+        "description": "null"
+    }
+},
+{
+    "model": "books.genre",
+    "pk": 2,
+    "fields": {
+        "name": "Научная фантастика",
+        "description": "null"
+    }
+},
+{
+    "model": "books.genre",
+    "pk": 3,
+    "fields": {
+        "name": "Детектив",
+        "description": "Книги жанра детектива"
+    }
+},
+{
+    "model": "books.genre",
+    "pk": 4,
+    "fields": {
+        "name": "Роман",
+        "description": "Художественное произведение большой объёмности"
+    }
+},
+{
+    "model": "books.genre",
+    "pk": 5,
+    "fields": {
+        "name": "Рассказ",
+        "description": "Короткое художественное произведение"
+    }
+},
+{
+    "model": "books.genre",
+    "pk": 6,
+    "fields": {
+        "name": "Поэзия",
+        "description": "Произведение в стихах"
+    }
+},
+{
+    "model": "books.book",
+    "pk": 1,
+    "fields": {
+        "title": "Война и мир",
+        "author": 2,
+        "genre": 4,
+        "description": "",
+        "quantity": 5,
+        "available_quantity": 5,
+        "publication_date": "1869-01-01",
+        "publisher": "Современник",
+        "cover_image": "",
+        "is_available": true
+    }
+},
+{
+    "model": "books.book",
+    "pk": 2,
+    "fields": {
+        "title": "Преступление и наказание",
+        "author": 3,
+        "genre": 4,
+        "description": "",
+        "quantity": 3,
+        "available_quantity": 2,
+        "publication_date": "1886-01-01",
+        "publisher": "Русский вестник",
+        "cover_image": "",
+        "is_available": true
+    }
+},
+{
+    "model": "books.book",
+    "pk": 3,
+    "fields": {
+        "title": "Мастер и Маргарита",
+        "author": 4,
+        "genre": 4,
+        "description": "",
+        "quantity": 6,
+        "available_quantity": 6,
+        "publication_date": "1939-03-15",
+        "publisher": "Молодая гвардия",
+        "cover_image": "",
+        "is_available": true
+    }
+},
+{
+    "model": "books.book",
+    "pk": 4,
+    "fields": {
+        "title": "Анна Каренина",
+        "author": 2,
+        "genre": 4,
+        "description": "",
+        "quantity": 2,
+        "available_quantity": 2,
+        "publication_date": "1878-01-01",
+        "publisher": "Русский вестник",
+        "cover_image": "",
+        "is_available": true
+    }
+},
+{
+    "model": "books.rentbooks",
+    "pk": 1,
+    "fields": {
+        "book": 1,
+        "date_issue": "2026-08-03",
+        "return_date": "2026-08-04",
+        "is_returned": true,
+        "user": 1,
+        "deadline": "2026-08-06"
+    }
+},
+{
+    "model": "books.rentbooks",
+    "pk": 2,
+    "fields": {
+        "book": 4,
+        "date_issue": "2026-08-03",
+        "return_date": "2026-08-04",
+        "is_returned": true,
+        "user": 1,
+        "deadline": "2026-08-06"
+    }
+}
+]
