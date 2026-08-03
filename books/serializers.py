@@ -35,7 +35,7 @@ class BookShortSerializer(serializers.ModelSerializer):
 
 
 class RentBooksSerializer(serializers.ModelSerializer):
-    reader = UserSerializerForRentBooks(read_only=True)
+    user = UserSerializerForRentBooks(read_only=True)
     date_issue = serializers.DateField(read_only=True, default=timezone.now)
 
     class Meta:

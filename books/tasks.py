@@ -8,7 +8,7 @@ from books.services import send_email
 def check_return_book():
     """Проверяет дату истечения срока и отправляет читателю письмо если срок пользования книги закончился"""
     rents_books = RentBooks.objects.filter(
-        deadline__lt=timezone.now(), is_returned=False
+        deadline__lte=timezone.now(), is_returned=False
     )
     for rent in rents_books:
         send_email(rent)
