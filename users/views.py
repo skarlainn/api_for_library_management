@@ -2,6 +2,7 @@ from rest_framework import generics
 from rest_framework.permissions import AllowAny, IsAdminUser
 
 from users.models import User
+from users.pagination import MyPagination
 from users.permissions import IsOwner
 from users.serializers import UserSerializer
 
@@ -31,4 +32,11 @@ class UserUpdateAPIView(generics.UpdateAPIView):
 
 class UserDestroyAPIView(generics.DestroyAPIView):
     queryset = User.objects.all()
+    permission_classes = (IsAdminUser, IsOwner)
+
+
+class UserListAPIView(generics.ListAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
     permission_classes = (IsAdminUser,)
+    pagination_class = MyPagination
