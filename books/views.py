@@ -18,78 +18,59 @@ class BookViewSet(viewsets.ModelViewSet):
     queryset = Book.objects.all()
     pagination_class = MyPagination
     serializer_class = BookSerializer
-    filter_backends = [
-        DjangoFilterBackend,
-    ]
-    filterset_fields = (
-        "title",
-        "author__last_name",
-        "genre__name",
-    )
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ("title", "author__last_name", "genre__name")
 
     def get_permissions(self):
-        if self.action == "list" or self.action == "retrieve":
-            permission_classes = [
-                AllowAny,
-            ]
+        if self.action in ("list", "retrieve"):
+            permission_classes = [AllowAny]
         elif self.action in ("update", "destroy", "partial_update", "create"):
             permission_classes = [IsAdminUser]
+        else:
+            permission_classes = [AllowAny]  # ← добавить else
         return [permission() for permission in permission_classes]
 
 
 class GenreCreateApiView(generics.CreateAPIView):
     queryset = Genre.objects.all()
     serializer_class = GenreSerializer
-    permission_classes = [
-        IsAdminUser,
-    ]
+    permission_classes = [IsAdminUser]
 
 
 class GenreRetrieveApiView(generics.RetrieveAPIView):
     queryset = Genre.objects.all()
     serializer_class = GenreSerializer
-    permission_classes = [
-        AllowAny,
-    ]
+    permission_classes = [AllowAny]
 
 
 class GenreListApiView(generics.ListAPIView):
     queryset = Genre.objects.all()
     serializer_class = GenreSerializer
     pagination_class = MyPagination
-    permission_classes = [
-        AllowAny,
-    ]
-    # filter_backends = [DjangoFilterBackend,]
-    # filterset_fields = ("name",)
+    permission_classes = [AllowAny]
 
 
 class GenreUpdateApiView(generics.UpdateAPIView):
     queryset = Genre.objects.all()
     serializer_class = GenreSerializer
-    permission_classes = [
-        IsAdminUser,
-    ]
+    permission_classes = [IsAdminUser]
 
 
 class GenreDestroyApiView(generics.DestroyAPIView):
     queryset = Genre.objects.all()
-    permission_classes = [
-        IsAdminUser,
-    ]
+    permission_classes = [IsAdminUser]
 
 
 class RentBooksListApiView(generics.ListAPIView):
     queryset = RentBooks.objects.all()
     serializer_class = RentBooksSerializer
     pagination_class = MyPagination
-    permission_classes = [IsAdminUser | IsOwner]
+    permission_classes = [IsAdminUser, IsOwner]  # ← исправлено
 
     def get_queryset(self):
         if IsAdminUser().has_permission(self.request, self):
             return RentBooks.objects.all()
-        else:
-            return RentBooks.objects.filter(user=self.request.user)
+        return RentBooks.objects.filter(user=self.request.user)  # ← исправлено
 
 
 class RentBooksCreateApiView(generics.CreateAPIView):
@@ -105,13 +86,13 @@ class RentBooksCreateApiView(generics.CreateAPIView):
 class RentBooksRetrieveApiView(generics.RetrieveAPIView):
     queryset = RentBooks.objects.all()
     serializer_class = RentBooksSerializer
-    permission_classes = [IsAdminUser | IsOwner]
+    permission_classes = [IsAdminUser, IsOwner]  # ← исправлено
 
 
 class RentBooksUpdateApiView(generics.UpdateAPIView):
     queryset = RentBooks.objects.all()
     serializer_class = RentBooksUpdateSerializers
-    permission_classes = [IsAdminUser | IsOwner]
+    permission_classes = [IsAdminUser, IsOwner]  # ← исправлено
 
     def perform_update(self, serializer):
         data = serializer.save()
@@ -122,6 +103,4 @@ class RentBooksUpdateApiView(generics.UpdateAPIView):
 
 class RentBooksDestroyApiView(generics.DestroyAPIView):
     queryset = RentBooks.objects.all()
-    permission_classes = [
-        IsAdminUser,
-    ]
+    permission_classes = [IsAdminUser]
