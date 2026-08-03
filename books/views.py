@@ -5,7 +5,12 @@ from rest_framework.permissions import AllowAny, IsAdminUser
 from users.permissions import IsOwner
 from .models import Book, Genre, RentBooks
 from .pagination import MyPagination
-from .serializers import BookSerializer, GenreSerializer, RentBooksSerializer, RentBooksUpdateSerializers
+from .serializers import (
+    BookSerializer,
+    GenreSerializer,
+    RentBooksSerializer,
+    RentBooksUpdateSerializers,
+)
 from .services import take_book, return_book
 
 
@@ -21,9 +26,11 @@ class BookViewSet(viewsets.ModelViewSet):
     )
 
     def get_permissions(self):
-        if self.action == 'list' or self.action == 'retrieve':
-            permission_classes = [AllowAny, ]
-        elif self.action in ('update', 'destroy', 'partial_update', 'create'):
+        if self.action == "list" or self.action == "retrieve":
+            permission_classes = [
+                AllowAny,
+            ]
+        elif self.action in ("update", "destroy", "partial_update", "create"):
             permission_classes = [IsAdminUser]
         return [permission() for permission in permission_classes]
 
@@ -31,20 +38,26 @@ class BookViewSet(viewsets.ModelViewSet):
 class GenreCreateApiView(generics.CreateAPIView):
     queryset = Genre.objects.all()
     serializer_class = GenreSerializer
-    permission_classes = [IsAdminUser,]
+    permission_classes = [
+        IsAdminUser,
+    ]
 
 
 class GenreRetrieveApiView(generics.RetrieveAPIView):
     queryset = Genre.objects.all()
     serializer_class = GenreSerializer
-    permission_classes = [AllowAny,]
+    permission_classes = [
+        AllowAny,
+    ]
 
 
 class GenreListApiView(generics.ListAPIView):
     queryset = Genre.objects.all()
     serializer_class = GenreSerializer
     pagination_class = MyPagination
-    permission_classes = [AllowAny,]
+    permission_classes = [
+        AllowAny,
+    ]
 
 
 class GenreUpdateApiView(generics.UpdateAPIView):
@@ -102,6 +115,9 @@ class RentBooksUpdateApiView(generics.UpdateAPIView):
         return_book(data, book)
         data.save()
 
+
 class RentBooksDestroyApiView(generics.DestroyAPIView):
     queryset = RentBooks.objects.all()
-    permission_classes = [IsAdminUser,]
+    permission_classes = [
+        IsAdminUser,
+    ]

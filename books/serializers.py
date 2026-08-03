@@ -6,6 +6,7 @@ from books.models import Book, Genre, RentBooks
 from books.validators import DeadlineValidator
 from users.serializers import UserSerializerForRentBooks
 
+
 class GenreSerializer(serializers.ModelSerializer):
 
     class Meta:
@@ -35,8 +36,7 @@ class BookShortSerializer(serializers.ModelSerializer):
 
 class RentBooksSerializer(serializers.ModelSerializer):
     reader = UserSerializerForRentBooks(read_only=True)
-    date_issue = serializers.DateField(read_only=True,
-                                       default=timezone.now)
+    date_issue = serializers.DateField(read_only=True, default=timezone.now)
 
     class Meta:
         model = RentBooks
@@ -46,8 +46,6 @@ class RentBooksSerializer(serializers.ModelSerializer):
 
 class RentBooksUpdateSerializers(serializers.ModelSerializer):
 
-
     class Meta:
         model = RentBooks
         fields = "__all__"
-

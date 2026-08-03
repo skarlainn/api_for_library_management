@@ -5,11 +5,9 @@ from users.models import User
 NULLABLE = {"blank": True, "null": True}
 
 
-
 class Genre(models.Model):
     name = models.CharField(max_length=150, verbose_name="Название жанра")
     description = models.TextField(verbose_name="Описание жанра", **NULLABLE)
-
 
     def __str__(self):
         return f"{self.name}"
@@ -43,11 +41,17 @@ class Book(models.Model):
     )
     description = models.TextField(verbose_name="Описание книги", **NULLABLE)
     quantity = models.PositiveSmallIntegerField(verbose_name="Количество книг")
-    available_quantity = models.PositiveSmallIntegerField(verbose_name="Доступное количество книг")
+    available_quantity = models.PositiveSmallIntegerField(
+        verbose_name="Доступное количество книг"
+    )
     publication_date = models.DateField(verbose_name="Дата публикации", **NULLABLE)
     publisher = models.CharField(max_length=150, verbose_name="Издатель")
-    cover_image = models.ImageField(upload_to="books/cover_image", verbose_name="Обложка", **NULLABLE)
-    is_available = models.BooleanField(default=True, help_text="Доступна ли книга для выдачи")
+    cover_image = models.ImageField(
+        upload_to="books/cover_image", verbose_name="Обложка", **NULLABLE
+    )
+    is_available = models.BooleanField(
+        default=True, help_text="Доступна ли книга для выдачи"
+    )
 
     def __str__(self):
         return f"{self.title} - {self.author}"
@@ -70,10 +74,14 @@ class RentBooks(models.Model):
     return_date = models.DateField(verbose_name="Дата возврата книги", **NULLABLE)
     is_returned = models.BooleanField(default=False, verbose_name="Флаг возврата книги")
     user = models.ForeignKey(
-        User, on_delete=models.DO_NOTHING, verbose_name="Читатель книги", help_text="Читатель книги"
+        User,
+        on_delete=models.DO_NOTHING,
+        verbose_name="Читатель книги",
+        help_text="Читатель книги",
     )
     deadline = models.DateField(
-        verbose_name="Крайний срок сдачи книги", help_text="Укажите крайний срок сдачи книги в формате YYYY-MM-DD"
+        verbose_name="Крайний срок сдачи книги",
+        help_text="Укажите крайний срок сдачи книги в формате YYYY-MM-DD",
     )
 
     def __str__(self):

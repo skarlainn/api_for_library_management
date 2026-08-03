@@ -9,7 +9,8 @@ class PhoneNumberValidator:
         self.field_name = field_name
         # Регулярное выражение для международного формата (+79991234567)
         self.international_regex = RegexValidator(
-            regex=r"^\+?7?\d{10}$", message="Номер телефона должен быть в формате '+79991234567' или '89991234567'"
+            regex=r"^\+?7?\d{10}$",
+            message="Номер телефона должен быть в формате '+79991234567' или '89991234567'",
         )
 
     def __call__(self, instance):

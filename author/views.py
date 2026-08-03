@@ -10,7 +10,9 @@ class AuthorCreateApiView(generics.CreateAPIView):
     """Эндпоинт создания автора"""
 
     serializer_class = AuthorSerializers
-    permission_classes = [IsAdminUser,]
+    permission_classes = [
+        IsAdminUser,
+    ]
 
 
 class AuthorRetrieveApiView(generics.RetrieveAPIView):
@@ -18,7 +20,9 @@ class AuthorRetrieveApiView(generics.RetrieveAPIView):
 
     queryset = Author.objects.all()
     serializer_class = AuthorSerializers
-    permission_classes = [AllowAny,]
+    permission_classes = [
+        AllowAny,
+    ]
 
 
 class AuthorListApiView(generics.ListAPIView):
@@ -27,7 +31,9 @@ class AuthorListApiView(generics.ListAPIView):
     queryset = Author.objects.all()
     serializer_class = AuthorSerializers
     pagination_class = MyPagination
-    permission_classes = [AllowAny,]
+    permission_classes = [
+        AllowAny,
+    ]
 
 
 class AuthorUpdateApiView(generics.UpdateAPIView):
@@ -36,10 +42,15 @@ class AuthorUpdateApiView(generics.UpdateAPIView):
     queryset = Author.objects.all()
     serializer_class = AuthorSerializers
 
-    permission_classes = [IsAdminUser,]
+    permission_classes = [
+        IsAdminUser,
+    ]
+
 
 class AuthorDestroyApiView(generics.DestroyAPIView):
     """Эндпоинт удаления автора"""
 
     queryset = Author.objects.all()
-    permission_classes = [IsAdminUser,]
+    permission_classes = [
+        IsAdminUser,
+    ]
