@@ -1,5 +1,5 @@
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import viewsets, generics
-from rest_framework.filters import SearchFilter
 from rest_framework.permissions import AllowAny, IsAdminUser
 
 from users.permissions import IsOwner
@@ -18,11 +18,13 @@ class BookViewSet(viewsets.ModelViewSet):
     queryset = Book.objects.all()
     pagination_class = MyPagination
     serializer_class = BookSerializer
-    filter_backends = [SearchFilter]
+    filter_backends = [
+        DjangoFilterBackend,
+    ]
     filterset_fields = (
         "title",
-        "author",
-        "genre",
+        "author__last_name",
+        "genre__name",
     )
 
     def get_permissions(self):
@@ -58,6 +60,8 @@ class GenreListApiView(generics.ListAPIView):
     permission_classes = [
         AllowAny,
     ]
+    # filter_backends = [DjangoFilterBackend,]
+    # filterset_fields = ("name",)
 
 
 class GenreUpdateApiView(generics.UpdateAPIView):
@@ -85,7 +89,7 @@ class RentBooksListApiView(generics.ListAPIView):
         if IsAdminUser().has_permission(self.request, self):
             return RentBooks.objects.all()
         else:
-            return RentBooks.objects.filter(reader=self.request.user)
+            return RentBooks.objects.filter(user=self.request.user)
 
 
 class RentBooksCreateApiView(generics.CreateAPIView):
@@ -93,7 +97,7 @@ class RentBooksCreateApiView(generics.CreateAPIView):
     serializer_class = RentBooksSerializer
 
     def perform_create(self, serializer):
-        data = serializer.save(reader=self.request.user)
+        data = serializer.save(user=self.request.user)
         take_book(data.book)
         data.save()
 
